@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AudioPlayer test page</title>
+        <script src="./vendor/underscore.js"></script>
+        <script src="./vendor/zepto.js"></script>
+        <script src="./audioPlayer.js"></script>
+    </head>
+    <body>
+        <div class="ap_container">
+            <div class="ap_controlls">
+                <a class="ap_btn_start">start</a>
+                <a class="ap_btn_pause">pause</a>
+                <a class="ap_btn_stop">stop</a>
+            </div>
+            <div class="ap_progress">
+                <div>&nbsp;</div>
+            </div>
+            <div class="ap_audio">
+                <audio src="fichier" controls preload="auto" autobuffer></audio>
+            </div>
+        </div>
+        <script>
+            $(function() {
+                window.player = new $.audioPlayer({
+                    foo: 'baz'
+                });
+                console.log(player);
+            });
+        </script>
+
+        <link href="./vendor/jasmine/lib/jasmine-core/jasmine.css" rel="stylesheet"/>
+        <script type="text/javascript" src="./vendor/jasmine/lib/jasmine-core/jasmine.js"></script>
+
+
+        <!-- include source files here... -->
+        <script type="text/javascript" src="./vendor/jasmine/src/html/HtmlReporterHelpers.js"></script>
+        <script type="text/javascript" src="./vendor/jasmine/src/html/HtmlReporter.js"></script>
+        <script type="text/javascript" src="./vendor/jasmine/src/html/HtmlReporterHelpers.js"></script>
+        <script type="text/javascript" src="./vendor/jasmine/src/html/ReporterView.js"></script>
+        <script type="text/javascript" src="./vendor/jasmine/src/html/SpecView.js"></script>
+        <script type="text/javascript" src="./vendor/jasmine/src/html/SuiteView.js"></script>
+        <script type="text/javascript" src="./vendor/jasmine/src/html/TrivialReporter.js"></script>
+        <script type="text/javascript" src="./vendor/jasmine/src/console/ConsoleReporter.js"></script>
+
+
+        <script type="text/javascript" src="./test.js"></script>
+
+        <script type="text/javascript">
+            (function() {
+             var jasmineEnv = jasmine.getEnv();
+             jasmineEnv.updateInterval = 1000;
+
+             var htmlReporter = new jasmine.HtmlReporter();
+
+             jasmineEnv.addReporter(htmlReporter);
+
+             jasmineEnv.specFilter = function(spec) {
+             return htmlReporter.specFilter(spec);
+             };
+
+             var currentWindowOnload = window.onload;
+
+             window.onload = function() {
+             if (currentWindowOnload) {
+             currentWindowOnload();
+             }
+             execJasmine();
+             };
+
+             function execJasmine() {
+                 jasmineEnv.execute();
+             }
+
+            })();
+</script>
+    </body>
+</html>

@@ -7,39 +7,71 @@
         for (var name in this.options)
             if (options[name]) this.options[name] = options[name];
 
-        this.element = $(this.options.audio).hide()[0];
+        this.element = $(this.options.audio)[0];
+        this.trackList = [];
 
         return this;
     }
 
-
     $.audioPlayer.prototype.options = {
-        container: $('.ap_container')
-      , progress: $('.ap_progress div')
+        progress: $('.ap_progress div')
       , audio: '.ap_audio audio'
-
-      , btn_start: $('.ap_btn_start')
-      , btn_pause: $('.ap_btn_pause')
-      , btn_stop: $('.ap_btn_stop')
-
     };
 
+    /* --- Audio controlls --- */
+
+    // play the current track
     $.audioPlayer.prototype.play = function() {
         this.element.play();
-        console.log(this.element);
     }
 
+    // pause the player
     $.audioPlayer.prototype.pause = function() {
         this.element.pause();
     }
 
+    // stop the player
     $.audioPlayer.prototype.stop = function() {
         this.element.pause();
     }
 
+    // change the current track playing
     $.audioPlayer.prototype.load = function(track) {
+        this.current = track;
         this.element.src = track;
         this.element.load();
+    }
+
+
+    /* --- Playlist controlls --- */
+
+    // add a track to the end of the playlist
+    $.audioPlayer.prototype.addTrack = function(track) {
+        this.trackList.push(track);
+    }
+
+    $.audioPlayer.prototype.prev = function() {
+        var track;
+        var prevPos = this.trackList.indexOf(this.current) - 1;
+
+        if (this.trackList[prevPos]) {
+            track = this.trackList[prevPos];
+        } else if (prevPos == -2) {
+            track = this.trackList.pop();
+        }
+
+        this.load(track);
+    }
+
+    $.audioPlayer.prototype.next = function() {
+        var track;
+        var nextPos = this.trackList.indexOf(this.current) + 1;
+
+        if (this.trackList[nextPos]) {
+            track = this.trackList[nextPos];
+        }
+
+        this.load(track);
     }
 
 })(Zepto);

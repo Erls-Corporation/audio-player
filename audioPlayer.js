@@ -16,35 +16,36 @@
     $.audioPlayer.prototype.options = {
         progress: $('.ap_progress div')
       , audio: '.ap_audio audio'
-      , onPlay: function(player) {}
-      , onPause: function(player) {}
-      , onStop: function(player) {}
-      , onLoad: function(player) {}
     };
+
+    $.audioPlayer.prototype.onPlay  = function(player) {};
+    $.audioPlayer.prototype.onPause = function(player) {};
+    $.audioPlayer.prototype.onStop  = function(player) {};
+    $.audioPlayer.prototype.onLoad  = function(player) {};
 
     /* --- Audio controlls --- */
 
     // play the current track
     $.audioPlayer.prototype.play = function() {
-        this.options.onPlay(this);
+        this.onPlay(this);
         this.element.play();
     }
 
     // pause the player
     $.audioPlayer.prototype.pause = function() {
-        this.options.onPause(this);
+        this.onPause(this);
         this.element.pause();
     }
 
     // stop the player
     $.audioPlayer.prototype.stop = function() {
-        this.options.onStop(this);
+        this.onStop(this);
         this.element.pause();
     }
 
     // change the current track playing
     $.audioPlayer.prototype.load = function(track) {
-        this.options.onLoad(this);
+        this.onLoad(this);
         this.current = track;
         this.element.src = track;
         this.element.load();

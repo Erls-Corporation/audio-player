@@ -61,9 +61,9 @@ describe("audioPlayer.js", function() {
             this.addMatchers(matchers);
         });
 
-        it("addTrack() should add a track at the end of the playlsit", function() {
-            player.addTrack('my_track');
-            player.addTrack('my_second_track');
+        it("add() should add a track at the end of the playlsit", function() {
+            player.add('my_track');
+            player.add('my_second_track');
 
             expect(player.trackList[0]).toBe('my_track');
             expect(player.trackList[1]).toBe('my_second_track');
@@ -75,9 +75,9 @@ describe("audioPlayer.js", function() {
         });
 
         it("next() play nothing if it is the end of the playlist", function() {
-            player.addTrack('my_track_1');
-            player.addTrack('my_track_2');
-            player.addTrack('my_track_3');
+            player.add('my_track_1');
+            player.add('my_track_2');
+            player.add('my_track_3');
             player.load('my_track_3');
 
             player.next();
@@ -85,16 +85,16 @@ describe("audioPlayer.js", function() {
         });
 
         it("next() play the first track if there's not current track playing", function() {
-            player.addTrack('my_track');
+            player.add('my_track');
             player.next();
             expect(player).toPlay('my_track');
         });
 
         it("next() play the next track", function() {
-            player.addTrack('my_track');
+            player.add('my_track');
             player.load('my_track');
 
-            player.addTrack('my_track_after');
+            player.add('my_track_after');
             player.next();
             expect(player).toPlay('my_track_after');
         });
@@ -105,22 +105,22 @@ describe("audioPlayer.js", function() {
         });
 
         it("prev() play nothing if it is the start of the playlist", function() {
-            player.addTrack('my_track_1');
+            player.add('my_track_1');
             player.load('my_track_1');
             player.prev();
             expect(player).toPlay('undefined');
         });
 
         it("prev() play the last if there's not current track playing", function() {
-            player.addTrack('my_track');
-            player.addTrack('my_track_end');
+            player.add('my_track');
+            player.add('my_track_end');
             player.prev();
             expect(player).toPlay('my_track_end');
         });
 
         it("prev() play the previous track", function() {
-            player.addTrack('my_track_prev');
-            player.addTrack('my_track');
+            player.add('my_track_prev');
+            player.add('my_track');
             player.load('my_track');
 
             player.prev();

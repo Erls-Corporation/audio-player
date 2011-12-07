@@ -46,7 +46,7 @@
     /* --- Playlist controlls --- */
 
     // add a track to the end of the playlist
-    $.audioPlayer.prototype.addTrack = function(track) {
+    $.audioPlayer.prototype.add = function(track) {
         this.trackList.push(track);
     }
 

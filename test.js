@@ -72,15 +72,15 @@ describe("audioPlayer.js", function() {
         });
 
         it("load() should dispatch 'onLoad' event", function() {
-            player.onLoad = function(player) { player.onLoadCalled = true };
-            player.load();
-            expect(player.onLoadCalled).toBe(true);
+            player.onLoad = function(player, track) { player.onLoadCalled = track };
+            player.load('a_track.mp3');
+            expect(player.onLoadCalled).toBe('a_track.mp3');
         });
 
         it("add() should dispatch 'onAdd' event", function() {
-            player.onAdd = function(player) { player.onAddCalled = true };
+            player.onAdd = function(player, track) { player.onAddCalled = track };
             player.add('a_track.mp3');
-            expect(player.onAddCalled).toBe(true);
+            expect(player.onAddCalled).toBe('a_track.mp3');
         });
     });
 

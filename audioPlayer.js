@@ -20,8 +20,8 @@
     $.audioPlayer.prototype.onPlay  = function(player) {};
     $.audioPlayer.prototype.onPause = function(player) {};
     $.audioPlayer.prototype.onStop  = function(player) {};
-    $.audioPlayer.prototype.onLoad  = function(player) {};
-    $.audioPlayer.prototype.onAdd   = function(player) {};
+    $.audioPlayer.prototype.onLoad  = function(player, track) {};
+    $.audioPlayer.prototype.onAdd   = function(player, track) {};
 
     /* --- Audio controlls --- */
 
@@ -45,7 +45,7 @@
 
     // change the current track playing
     $.audioPlayer.prototype.load = function(track) {
-        this.onLoad(this);
+        this.onLoad(this, track);
         this.current = track;
         this.element.src = track;
         this.element.load();
@@ -55,7 +55,7 @@
 
     // add a track to the end of the playlist
     $.audioPlayer.prototype.add = function(track) {
-        this.onAdd(this);
+        this.onAdd(this, track);
         this.trackList.push(track);
     }
 

@@ -76,6 +76,12 @@ describe("audioPlayer.js", function() {
             player.load();
             expect(player.onLoadCalled).toBe(true);
         });
+
+        it("add() should dispatch 'onAdd' event", function() {
+            player.onAdd = function(player) { player.onAddCalled = true };
+            player.add('a_track.mp3');
+            expect(player.onAddCalled).toBe(true);
+        });
     });
 
     describe('playlist', function() {

@@ -14,14 +14,14 @@
     }
 
     $.audioPlayer.prototype.options = {
-        progress: $('.ap_progress div')
-      , audio: '.ap_audio audio'
+        audio: 'audio'
     };
 
     $.audioPlayer.prototype.onPlay  = function(player) {};
     $.audioPlayer.prototype.onPause = function(player) {};
     $.audioPlayer.prototype.onStop  = function(player) {};
     $.audioPlayer.prototype.onLoad  = function(player) {};
+    $.audioPlayer.prototype.onAdd   = function(player) {};
 
     /* --- Audio controlls --- */
 
@@ -55,6 +55,7 @@
 
     // add a track to the end of the playlist
     $.audioPlayer.prototype.add = function(track) {
+        this.onAdd(this);
         this.trackList.push(track);
     }
 

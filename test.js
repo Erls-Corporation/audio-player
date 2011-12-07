@@ -50,7 +50,32 @@ describe("audioPlayer.js", function() {
             expect(player).toPlay('my_track');
             expect(player).toBePlaying();
         });
+    });
 
+    describe('events', function() {
+        it("play() should dispatch 'onPlay' event", function() {
+            player.options.onPlay = function(player) { player.onPlayCalled = true };
+            player.play();
+            expect(player.onPlayCalled).toBe(true);
+        });
+
+        it("pause() should dispatch 'onPause' event", function() {
+            player.options.onPause = function(player) { player.onPauseCalled = true };
+            player.pause();
+            expect(player.onPauseCalled).toBe(true);
+        });
+
+        it("stop() should dispatch 'onStop' event", function() {
+            player.options.onStop = function(player) { player.onStopCalled = true };
+            player.stop();
+            expect(player.onStopCalled).toBe(true);
+        });
+
+        it("load() should dispatch 'onLoad' event", function() {
+            player.options.onLoad = function(player) { player.onLoadCalled = true };
+            player.load();
+            expect(player.onLoadCalled).toBe(true);
+        });
     });
 
     describe('playlist', function() {
